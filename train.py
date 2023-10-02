@@ -71,6 +71,8 @@ def train_epoch(model, loader, optimizer, criterion, device):
         total_loss += loss.item()
         _, predicted = outputs.max(1)
         correct += predicted.eq(labels).sum().item()
+
+        print(f"Train Loss: {total_loss:.4f}, Train Acc: {correct / len(train_dataset):.4f}")
         
     return total_loss / len(loader), correct / len(train_dataset)
 
