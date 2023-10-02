@@ -96,7 +96,10 @@ num_epochs = (300000 * 64) // len(train_dataset)
 
 for epoch in range(num_epochs):
     train_loss, train_acc = train_epoch(model, train_loader, optimizer, criterion, device)
+    print(train_loss, train_acc)
+
     val_loss, val_acc = validate_epoch(model, val_loader, criterion, device)
+    print(val_loss, val_acc)
     
     print(f"Epoch: {epoch+1}/{num_epochs}, Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.4f}, Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.4f}")
 
