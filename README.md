@@ -63,6 +63,10 @@ preds = v(img) # (1, 1000)
 print(preds)
 ```
 
+# Model Architecture
+- Regular vit with new parallel layers, QK(Query/Key)Normalization, and omitted biases.
+
+----
 # Dataset Strategy
 The paper trains ViT-22B on a version of the JFT dataset that has been extended to around 4 billion images. JFT is a large-scale dataset scraped from the internet, originally containing over 300 million images labeled with a hierarchical taxonomy of 30,000 categories. 
 
