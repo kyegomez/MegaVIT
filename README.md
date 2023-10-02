@@ -105,4 +105,4 @@ Eprint = {arXiv:2302.05442},
 ```
 
 # Todo
-- [ ] 
+- [ ] Add flash attention, with layernorm before attn, and then layernom for qk values,
