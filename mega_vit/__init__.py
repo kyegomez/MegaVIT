@@ -1,0 +1,1 @@
+from mega_vit.main import MegaVit

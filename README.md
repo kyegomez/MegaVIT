@@ -13,9 +13,54 @@ A simple implementation of a CLIP that splits up an image into quandrants and th
 
 
 # Install
+`pip install mega-vit`
 
 # Usage
+- Simple usage,
+```python
+import torch
+from mega_vit.main import MegaVit
 
+v = MegaVit(
+    image_size = 256,
+    patch_size = 32,
+    num_classes = 1000,
+    dim = 1024,
+    depth = 6,
+    heads = 16,
+    mlp_dim = 2048,
+    dropout = 0.1,
+    emb_dropout = 0.1
+)
+
+img = torch.randn(1, 3, 256, 256)
+
+preds = v(img) # (1, 1000)
+print(preds)
+```
+
+- Hyperparams as stated in paper:
+```python
+import torch
+from mega_vit.main import MegaVit
+
+v = ViT(
+    image_size = 224,
+    patch_size = 14,
+    num_classes = 1000,
+    dim = 6144,
+    depth = 48,
+    heads = 48,
+    mlp_dim = 2048,
+    dropout = 0.1,
+    emb_dropout = 0.1
+)
+
+img = torch.randn(1, 3, 224, 224)
+
+preds = v(img) # (1, 1000)
+print(preds)
+```
 # Architecture
 
 # Dataset Strategy
