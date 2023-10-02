@@ -1,7 +1,8 @@
 [![Multi-Modality](agorabanner.png)](https://discord.gg/qUtxnK2NMf)
 
 # MegaVit
-A simple implementation of a CLIP that splits up an image into quandrants and then gets the embeddings for each quandrant
+The open source implementation of the model from "Scaling Vision Transformers to 22 Billion Parameters"
+
 
 
 [Paper Link](https://arxiv.org/pdf/2302.05442.pdf)
@@ -61,7 +62,6 @@ img = torch.randn(1, 3, 224, 224)
 preds = v(img) # (1, 1000)
 print(preds)
 ```
-# Architecture
 
 # Dataset Strategy
 The paper trains ViT-22B on a version of the JFT dataset that has been extended to around 4 billion images. JFT is a large-scale dataset scraped from the internet, originally containing over 300 million images labeled with a hierarchical taxonomy of 30,000 categories. 
@@ -91,4 +91,11 @@ Below is a table summarizing some of the key datasets used in the paper:
 MIT
 
 # Citations
-
+```
+@misc{2302.05442,
+Author = {Mostafa Dehghani and Josip Djolonga and Basil Mustafa and Piotr Padlewski and Jonathan Heek and Justin Gilmer and Andreas Steiner and Mathilde Caron and Robert Geirhos and Ibrahim Alabdulmohsin and Rodolphe Jenatton and Lucas Beyer and Michael Tschannen and Anurag Arnab and Xiao Wang and Carlos Riquelme and Matthias Minderer and Joan Puigcerver and Utku Evci and Manoj Kumar and Sjoerd van Steenkiste and Gamaleldin F. Elsayed and Aravindh Mahendran and Fisher Yu and Avital Oliver and Fantine Huot and Jasmijn Bastings and Mark Patrick Collier and Alexey Gritsenko and Vighnesh Birodkar and Cristina Vasconcelos and Yi Tay and Thomas Mensink and Alexander Kolesnikov and Filip Pavetić and Dustin Tran and Thomas Kipf and Mario Lučić and Xiaohua Zhai and Daniel Keysers and Jeremiah Harmsen and Neil Houlsby},
+Title = {Scaling Vision Transformers to 22 Billion Parameters},
+Year = {2023},
+Eprint = {arXiv:2302.05442},
+}
+```
