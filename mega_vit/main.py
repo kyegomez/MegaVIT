@@ -1,7 +1,7 @@
 import torch
-from torch import nn
 from einops import rearrange, repeat
 from einops.layers.torch import Rearrange
+from torch import nn
 
 # helpers
 
@@ -24,7 +24,12 @@ class LayerNorm(nn.Module):
         return self.layer_norm(x)
 
 class FeedForward(nn.Module):
-    def __init__(self, dim, hidden_dim, dropout = 0.):
+    def __init__(
+        self, 
+        dim, 
+        hidden_dim, 
+        dropout = 0.
+    ):
         super().__init__()
         self.net = nn.Sequential(
             nn.LayerNorm(dim),
@@ -87,7 +92,15 @@ class Attention(nn.Module):
         return self.to_out(out)
 
 class Transformer(nn.Module):
-    def __init__(self, dim, depth, heads, dim_head, mlp_dim, dropout = 0.):
+    def __init__(
+        self, 
+        dim, 
+        depth, 
+        heads, 
+        dim_head, 
+        mlp_dim, 
+        dropout = 0.
+    ):
         super().__init__()
         self.norm = nn.LayerNorm(dim)
         self.layers = nn.ModuleList([])
