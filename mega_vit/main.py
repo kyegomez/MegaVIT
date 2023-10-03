@@ -121,6 +121,56 @@ class Transformer(nn.Module):
         return self.norm(x)
 
 class MegaVit(nn.Module):
+    """
+    MegaVit model from https://arxiv.org/abs/2106.14759
+
+    Args:
+    -------
+    image_size: int
+        Size of image
+    patch_size: int
+        Size of patch
+    num_classes: int
+        Number of classes
+    dim: int
+        Dimension of embedding
+    depth: int
+        Depth of transformer
+    heads: int
+        Number of heads
+    mlp_dim: int
+        Dimension of MLP
+    pool: str
+        Type of pooling
+    channels: int
+        Number of channels
+    dim_head: int
+        Dimension of head
+    dropout: float
+        Dropout rate
+    emb_dropout: float
+        Dropout rate for embedding
+    
+    Returns:
+    --------
+    torch.Tensor
+        Predictions
+    
+    Methods:
+    --------
+    forward(img: torch.Tensor) -> torch.Tensor:
+        Forward pass
+    
+    Architecture:
+    -------------
+    1. Input image is passed through a patch embedding layer
+    2. Positional embedding is added
+    3. Dropout is applied
+    4. Transformer is applied
+    5. Pooling is applied
+    6. MLP head is applied
+    7. Output is returned
+    """
     def __init__(
         self, 
         *, 
