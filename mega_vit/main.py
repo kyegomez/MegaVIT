@@ -2,7 +2,7 @@ import torch
 from einops import rearrange, repeat
 from einops.layers.torch import Rearrange
 from torch import nn
-
+import torch.nn.functional as F
 # helpers
 
 def pair(t):
@@ -78,18 +78,29 @@ class Attention(nn.Module):
         qkv = self.to_qkv(x).chunk(3, dim = -1)
         q, k, v = map(lambda t: rearrange(t, 'b n (h d) -> b h n d', h = self.heads), qkv)
 
-        # #normalize key and values,  QK Normalization
+        # #normalize key and values or known QK Normalization
         k = self.norm_k(k)
         v = self.norm_v(v)
 
-        dots = torch.matmul(q, k.transpose(-1, -2)) * self.scale
+        # should this be replaced?
+        # dots = torch.matmul(q, k.transpose(-1, -2)) * self.scale
+        # attn = self.attend(dots)
+        # attn = self.dropout(attn)
+        # out = torch.matmul(attn, v)
+        
+        # attn
+        with torch.backends.cuda.sdp_kernel(enable_math=True):
+            #attention
+            out = F.scaled_dot_product_attention(q, k, v)
+            
+            #dropout
+            out = self.dropout(out)
 
-        attn = self.attend(dots)
-        attn = self.dropout(attn)
+            #rearrange to original shape
+            out = rearrange(out, 'b h n d -> b n (h d)')
 
-        out = torch.matmul(attn, v)
-        out = rearrange(out, 'b h n d -> b n (h d)')
-        return self.to_out(out)
+            #project out
+            return self.to_out(out)
 
 class Transformer(nn.Module):
     def __init__(
