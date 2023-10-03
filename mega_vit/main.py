@@ -18,8 +18,6 @@ class Parallel(nn.Module):
     def forward(self, x):
         return ([fn(x) for fn in self.fns])
 
-
-
 class LayerNorm(nn.Module):
     def __init__(
         self,
@@ -32,6 +30,7 @@ class LayerNorm(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.layer_norm(x)
+
 
 class FeedForward(nn.Module):
     def __init__(
@@ -144,6 +143,7 @@ class Transformer(nn.Module):
             x = x + attn(x) + ff(x)
         
         return self.norm(x)
+
 
 class MegaVit(nn.Module):
     """
