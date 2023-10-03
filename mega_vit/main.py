@@ -10,6 +10,16 @@ def pair(t):
 
 # classes
 
+class Parallel(nn.Module):
+    def __init__(self, *fns):
+        super().__init__()
+        self.fns = nn.ModuleList(fns)
+    
+    def forward(self, x):
+        return ([fn(x) for fn in self.fns])
+
+
+
 class LayerNorm(nn.Module):
     def __init__(
         self,
@@ -104,7 +114,8 @@ class Attention(nn.Module):
 
             #project out
             return self.to_out(out)
-
+        
+        
 class Transformer(nn.Module):
     def __init__(
         self, 

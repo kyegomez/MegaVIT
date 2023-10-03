@@ -1,1 +1,1 @@
-from mega_vit.main import MegaVit
+from mega_vit.main import MegaVit   
